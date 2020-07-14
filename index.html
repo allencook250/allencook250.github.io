@@ -1,0 +1,377 @@
+<html>
+
+<head>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+	<link rel="stylesheet" type="text/css" href="index.css">
+	
+	
+
+
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+
+</head>
+
+<script>
+
+
+
+	window.addEventListener("wheel", function(e){e.preventDefault();}, {passive: false} );
+
+	var disableEvent = false;
+
+	$(window).on('wheel', function(e) {
+	
+		
+	
+		if (disableEvent == false) {
+		
+			if (e.originalEvent.deltaY < 0) {
+			
+				scrollUp();
+				disableEvent = true;
+				scrollTimer();
+				
+			} 
+			
+			else {
+			
+				scrollDown();
+				disableEvent = true;
+				scrollTimer();
+				
+			}
+			
+		}
+		
+	});
+		
+	function scrollTimer() {
+	
+		setTimeout (function () {	
+		
+			disableEvent = false;
+		}, 501);
+		
+	}
+	
+	
+		
+	window.onload = function() {
+	
+		setTimeout (function () {
+		
+			scrollTo(0,0);
+			document.getElementById("sidebarInfo_container_1").style.backgroundColor = "black";
+			document.getElementById("sidebarInfo_container_2").style.backgroundColor = "none";
+			document.getElementById("sidebarInfo_container_3").style.backgroundColor = "none";
+			
+		}, 100);
+	}
+	
+	var CurrentPage = 1;
+		
+	function scrollUp() {
+		
+		DocTop = Math.round(document.documentElement.scrollTop  ||  window.pageYOffset)
+		OneTop = Math.round(document.getElementById("main1").offsetTop);
+		TwoTop = Math.round(document.getElementById("main2").offsetTop);
+		ThreeTop = Math.round(document.getElementById("main3").offsetTop);
+			
+		if (CurrentPage == 2) {
+				
+			$('html, body').animate({
+				scrollTop: $("#main1").offset().top
+			}, 500);
+				
+			document.getElementById("sidebarInfo_container_1").style.backgroundColor = "black";
+			document.getElementById("sidebarInfo_container_2").style.backgroundColor = "white";
+			document.getElementById("sidebarInfo_container_3").style.backgroundColor = "white";
+			
+			CurrentPage = 1;
+			
+			return;
+
+		}
+			
+		if (CurrentPage == 3) {
+				
+			$('html, body').animate({
+				scrollTop: $("#main2").offset().top
+			}, 500);
+
+			document.getElementById("sidebarInfo_container_1").style.backgroundColor = "white";
+			document.getElementById("sidebarInfo_container_2").style.backgroundColor = "black";
+			document.getElementById("sidebarInfo_container_3").style.backgroundColor = "white";
+			
+			CurrentPage = 2;
+			
+			return;
+
+			}
+
+		}
+		
+		function scrollDown() {
+		
+			DocTop = Math.round(document.documentElement.scrollTop  ||  window.pageYOffset)
+			OneTop = Math.round(document.getElementById("main1").offsetTop);
+			TwoTop = Math.round(document.getElementById("main2").offsetTop);
+			ThreeTop = Math.round(document.getElementById("main3").offsetTop);	
+	
+			if (CurrentPage == 1) {
+			
+				$('html, body').animate({
+					scrollTop: $("#main2").offset().top
+				}, 500);
+				
+				document.getElementById("sidebarInfo_container_1").style.backgroundColor = "white";
+				document.getElementById("sidebarInfo_container_2").style.backgroundColor = "black";
+				document.getElementById("sidebarInfo_container_3").style.backgroundColor = "white";
+				
+				CurrentPage = 2;
+				
+				return;
+
+			}
+			
+			if (CurrentPage == 2) {
+				
+				$('html, body').animate({
+					scrollTop: $("#main3").offset().top
+				}, 500);
+				
+				document.getElementById("sidebarInfo_container_1").style.backgroundColor = "white";
+				document.getElementById("sidebarInfo_container_2").style.backgroundColor = "white";
+				document.getElementById("sidebarInfo_container_3").style.backgroundColor = "black";
+				
+				CurrentPage = 3;
+				
+				return;
+
+			}
+	
+		}
+
+		setTimeout(function(){
+	
+			document.addEventListener("scroll", main2animation2);
+			
+		}, 250);
+	
+		function main2animation2() {
+		
+			DocTop = Math.round(document.documentElement.scrollTop  ||  window.pageYOffset)
+			TwoTop = Math.round(document.getElementById("main2").offsetTop);
+		
+			if (DocTop > TwoTop / 2) {
+
+				var allElements2 = document.getElementsByName('main2box');
+				var allElements = document.getElementsByName('main2footer');
+
+				for (let i=0; i<6; i++) { 
+					task(i); 
+				} 
+  
+				function task(i) { 
+					setTimeout(function() { 
+						allElements2[i].classList.add("main2fadein");
+						allElements[i].classList.add("footer100");
+					}, 400 * i); 
+				} 
+			
+			}
+		
+		}
+
+</script>
+
+
+	<body>
+	
+		<div id="sidebarInfo">
+		
+			<div id="sidebarInfo_container">
+			
+				<div id="sidebarInfo_container_1">
+				
+				</div>
+				
+				<div id="sidebarInfo_container_2">
+				
+				</div>
+				
+				<div id="sidebarInfo_container_3">
+				
+				</div>
+			
+			</div>
+		
+		</div>
+		
+		<div id="main1">
+		
+			<div id="main1_container">
+		
+				<div id="main1_toptext">
+			
+					My Name
+			
+				</div>
+				
+				<div id="linebreak">
+				
+				</div>
+				
+				<div id="main1_bottomtext">
+			
+					Full Stack Web Developer
+			
+				</div>
+				
+				<div id="linebreak">
+				
+				</div>
+
+				<div id="main1_bottombutton">
+				
+					<div id="main1_bottombutton_ping">
+				
+					</div>
+				
+					Scroll Down
+				
+				</div>
+			
+			</div>
+		
+		</div>
+		
+		<div id="main2">
+		
+			<div id="main2_container">
+			
+				<div id="main2_header">
+				
+					Current Skills
+				
+				</div>
+			
+				<div id="main2_container_box" name="main2box">
+				
+					<div id="main2_container_box_header">
+					
+						HTML
+				
+					</div>
+					
+					<div id="main2_container_box_footer" name="main2footer">
+					
+						100%
+					
+					</div>
+				
+				</div>
+				
+				<div id="main2_container_box" name="main2box">
+				
+					<div id="main2_container_box_header">
+					
+						CSS
+				
+					</div>
+					
+					<div id="main2_container_box_footer" name="main2footer">
+					
+						100%
+					
+					</div>
+				
+				</div>
+				
+				<div id="main2_container_box" name="main2box">
+				
+					<div id="main2_container_box_header">
+					
+						Javascript
+				
+					</div>
+					
+					<div id="main2_container_box_footer" name="main2footer">
+					
+						100%
+					
+					</div>
+				
+				</div>
+				
+				<div id="main2_linebreak">
+				
+				</div>
+
+				
+				<div id="main2_container_box" name="main2box">
+				
+					<div id="main2_container_box_header">
+					
+						PHP
+				
+					</div>
+					
+					<div id="main2_container_box_footer" name="main2footer">
+					
+						100%
+					
+					</div>
+				
+				</div>
+				
+				<div id="main2_container_box" name="main2box">
+				
+					<div id="main2_container_box_header">
+					
+						Python
+				
+					</div>
+					
+					<div id="main2_container_box_footer" name="main2footer">
+					
+						100%
+					
+					</div>
+				
+				</div>
+				
+				<div id="main2_container_box" name="main2box">
+				
+					<div id="main2_container_box_header">
+					
+						C#
+				
+					</div>
+					
+					<div id="main2_container_box_footer" name="main2footer">
+					
+						100%
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		
+		</div>
+		
+		<div id="main3">
+		
+		</div>
+
+	</body>
+
+</html>
